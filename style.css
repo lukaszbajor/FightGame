@@ -5,7 +5,24 @@
   padding: 0;
   box-sizing: border-box;
 }
-ul {
+#root {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: #b045b0;
+}
+.logo {
+  color: white;
+}
+.theme {
+  cursor: pointer;
+}
+.list {
+  margin: 20px;
   display: flex;
   list-style: none;
 }
@@ -14,6 +31,7 @@ ul {
   display: flex;
   flex-direction: column;
   border: 1px solid black;
+  cursor: pointer;
 }
 .itemAvatar {
   width: 200px;
@@ -23,4 +41,7 @@ ul {
 .desc {
   padding: 2px;
   border-top: 1px solid black;
+}
+.active {
+  border-color: #b045b0;
 }

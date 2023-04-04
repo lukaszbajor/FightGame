@@ -1,5 +1,7 @@
-import { renderFighterList } from "./renderFighters.js";
-let fighters = [
+const rootElement = document.querySelector("#root");
+const startBtn = document.querySelector(".start");
+
+const fighters = [
   {
     name: "Wizard",
     shortDesc: "Lorem ipsum",
@@ -35,4 +37,36 @@ let fighters = [
   },
 ];
 
-renderFighterList(fighters);
+const renderFighters = () => {
+  const fightersList = document.createElement("ul");
+  fightersList.classList.add("list");
+  fighters.forEach((fighter) => {
+    const fightersItem = document.createElement("li");
+    fightersItem.innerHTML = `
+        <li class="item">
+        <img src="${fighter.avatar}" class="itemAvatar"/>
+        <p class="desc"><b>Type: </b>${fighter.name}</p>
+        <p class="desc">Description: ${fighter.shortDesc}</p>
+        <p class="desc">Best skill: ${fighter.criticAttack.name}</p>
+        </li>
+        `;
+    fightersList.appendChild(fightersItem);
+  });
+  rootElement.appendChild(fightersList);
+};
+
+renderFighters();
+
+const allPlayers = [...document.querySelectorAll(".item")];
+allPlayers.forEach((item, index) => {
+  item.classList.remove("active");
+  item.addEventListener("click", () => {
+    item.classList.add("active");
+  });
+});
+
+const startGame = () => {
+  rootElement.innerHTML = "";
+  startBtn.style.display = "none";
+};
+startBtn.addEventListener("click", startGame);
