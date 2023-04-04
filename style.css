@@ -1,5 +1,26 @@
-*,*::after,*::before{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+ul {
+  display: flex;
+  list-style: none;
+}
+.item {
+  margin: 0 5px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+}
+.itemAvatar {
+  width: 200px;
+  height: 250px;
+  padding: 3px;
+}
+.desc {
+  padding: 2px;
+  border-top: 1px solid black;
 }
