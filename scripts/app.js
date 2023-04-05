@@ -45,13 +45,13 @@ const renderFighters = () => {
   fightersList.classList.add("list");
   fighters.forEach((fighter) => {
     const fightersItem = document.createElement("li");
+    fightersItem.classList.add("item");
+    fightersItem.setAttribute('data-id', fighter.id)
     fightersItem.innerHTML = `
-        <li class="item" data-id=${fighter.id}>
         <img src="${fighter.avatar}" class="itemAvatar"/>
         <p class="desc"><b>Type: </b>${fighter.name}</p>
         <p class="desc">Description: ${fighter.shortDesc}</p>
         <p class="desc">Best skill: ${fighter.criticAttack.name}</p>
-        </li>
         `;
     fightersList.appendChild(fightersItem);
   });
@@ -68,7 +68,7 @@ item.classList.add("active");
 
   if(currentElement !== null){
     currentElement.classList.remove("active");
-  }
+    }
 
 currentElement=item;
    
@@ -76,9 +76,28 @@ currentElement=item;
  
 });
 
+const renderFight = () =>{
+  const fightMain = document.createElement("div");
+  fightMain.classList.add("fightBox");
+  let choosePlayer = currentElement.attributes['data-id'].value;
+   const userPlayer = document.createElement("div");
+    userPlayer.classList.add("item");
+    userPlayer.innerHTML = `  
+        <img src="${fighters[choosePlayer].avatar}" class="itemAvatar"/>
+        <p class="desc"><b>Type: </b>${fighters[choosePlayer].name}</p>
+        <p class="desc">Description: ${fighters[choosePlayer].shortDesc}</p>
+        <p class="desc">Best skill: ${fighters[choosePlayer].criticAttack.name}</p>
+        `;
+    fightMain.appendChild(userPlayer);
+  rootElement.appendChild(fightMain);
+
+}
+
 const startGame = () => {
   rootElement.innerHTML = "";
   startBtn.style.display = "none";
-  console.log(currentElement);
+  console.log(currentElement.attributes['data-id']);
+renderFight();
+
 };
 startBtn.addEventListener("click", startGame);
