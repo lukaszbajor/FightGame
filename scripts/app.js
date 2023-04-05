@@ -3,6 +3,7 @@ const startBtn = document.querySelector(".start");
 
 const fighters = [
   {
+    id:"1",
     name: "Wizard",
     shortDesc: "Lorem ipsum",
     attack: 8,
@@ -14,6 +15,7 @@ const fighters = [
     avatar: "./images/wizard-g090ae14b0_640.png",
   },
   {
+    id:"2",
     name: "Soldier",
     shortDesc: "Lorem ipsum",
     attack: 10,
@@ -25,6 +27,7 @@ const fighters = [
     avatar: "./images/army-g76cac165d_640.png",
   },
   {
+    id:"3",
     name: "Hunter",
     shortDesc: "Lorem ipsum",
     attack: 11,
@@ -43,7 +46,7 @@ const renderFighters = () => {
   fighters.forEach((fighter) => {
     const fightersItem = document.createElement("li");
     fightersItem.innerHTML = `
-        <li class="item">
+        <li class="item" data-id=${fighter.id}>
         <img src="${fighter.avatar}" class="itemAvatar"/>
         <p class="desc"><b>Type: </b>${fighter.name}</p>
         <p class="desc">Description: ${fighter.shortDesc}</p>
@@ -58,15 +61,24 @@ const renderFighters = () => {
 renderFighters();
 
 const allPlayers = [...document.querySelectorAll(".item")];
-allPlayers.forEach((item, index) => {
-  item.classList.remove("active");
-  item.addEventListener("click", () => {
-    item.classList.add("active");
+let currentElement=null;
+allPlayers.forEach((item) => {
+item.addEventListener("click", () => {
+item.classList.add("active"); 
+
+  if(currentElement !== null){
+    currentElement.classList.remove("active");
+  }
+
+currentElement=item;
+   
   });
+ 
 });
 
 const startGame = () => {
   rootElement.innerHTML = "";
   startBtn.style.display = "none";
+  console.log(currentElement);
 };
 startBtn.addEventListener("click", startGame);
