@@ -79,7 +79,7 @@ currentElement=item;
 const renderFight = () =>{
   const fightMain = document.createElement("div");
   fightMain.classList.add("fightBox");
-  let choosePlayer = currentElement.attributes['data-id'].value;
+  let choosePlayer = currentElement.attributes['data-id'].value -1;
    const userPlayer = document.createElement("div");
     userPlayer.classList.add("item");
     userPlayer.innerHTML = `  
@@ -89,7 +89,24 @@ const renderFight = () =>{
         <p class="desc">Best skill: ${fighters[choosePlayer].criticAttack.name}</p>
         `;
     fightMain.appendChild(userPlayer);
-  rootElement.appendChild(fightMain);
+  
+
+  let choosePc = Math.floor(Math.random() * fighters.length)
+
+  const pcPlayer = document.createElement("div");
+  pcPlayer.classList.add("item");
+  pcPlayer.innerHTML = `  
+      <img src="${fighters[choosePc].avatar}" class="itemAvatar"/>
+      <p class="desc"><b>Type: </b>${fighters[choosePc].name}</p>
+      <p class="desc">Description: ${fighters[choosePc].shortDesc}</p>
+      <p class="desc">Best skill: ${fighters[choosePc].criticAttack.name}</p>
+      `;
+  fightMain.appendChild(pcPlayer);
+rootElement.appendChild(fightMain);
+
+
+
+
 
 }
 
