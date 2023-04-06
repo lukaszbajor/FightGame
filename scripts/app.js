@@ -78,6 +78,8 @@ const renderFight = () => {
   // Create character user choose
   const fightMain = document.createElement("div");
   fightMain.classList.add("fightBox");
+  const characters = document.createElement("div");
+  characters.classList.add("characters");
   let choosePlayer = currentElement.attributes["data-id"].value - 1;
   const userPlayer = document.createElement("div");
   userPlayer.classList.add("item");
@@ -88,7 +90,7 @@ const renderFight = () => {
         <p class="desc">Description: ${fighters[choosePlayer].shortDesc}</p>
         <p class="desc">Best skill: ${fighters[choosePlayer].criticAttack.name}</p>
         `;
-  fightMain.appendChild(userPlayer);
+  characters.appendChild(userPlayer);
 
   //Create character pc choose
   let choosePc = Math.floor(Math.random() * fighters.length);
@@ -102,20 +104,21 @@ const renderFight = () => {
       <p class="desc">Description: ${fighters[choosePc].shortDesc}</p>
       <p class="desc">Best skill: ${fighters[choosePc].criticAttack.name}</p>
       `;
-  fightMain.appendChild(pcPlayer);
+  characters.appendChild(pcPlayer);
+  fightMain.appendChild(characters);
 
   //Create buttons to fight and event log
   const fightButtons = document.createElement("div");
-  fightMain.classList.add("fightButtons");
-  for (i = 0; i <= 3; i++) {
+  fightButtons.classList.add("fightButtons");
+  for (i = 1; i <= 3; i++) {
     const fightButton = document.createElement("button");
-    fightMain.classList.add("fightButton");
-    fightMain.appendChild(fightButton);
+    fightButton.classList.add("fightButton");
+    fightButtons.appendChild(fightButton);
   }
   fightMain.appendChild(fightButtons);
 
-  const eventLog = document.createElement("div");
-  fightMain.classList.add("eventLog");
+  const eventLog = document.createElement("ul");
+  eventLog.classList.add("eventLog");
   fightMain.appendChild(eventLog);
 
   rootElement.appendChild(fightMain);

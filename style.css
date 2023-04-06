@@ -42,6 +42,20 @@
   padding: 2px;
   border-top: 1px solid black;
 }
+
+.fightBox {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+}
+.characters {
+  display: flex;
+  justify-content: space-between;
+}
+.eventLog {
+  padding: 20px;
+  border: 1px solid black;
+}
 .active {
   border-color: #b045b0;
 }
