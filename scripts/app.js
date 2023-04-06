@@ -128,13 +128,20 @@ let hPc = fighters[choosePc].health;
 
 const attackPlayer = () => {
   const divHealthPC = document.querySelector(".healthPc");
-
   hPc =
     hPc -
     (Math.floor(Math.random() * fighters.length) +
       fighters[choosePlayer].attack);
 
   divHealthPC.textContent = hPc;
+  const AllFightButtons = document.querySelectorAll(".fightButton");
+  AllFightButtons.forEach((item) => {
+    item.setAttribute("disabled", true);
+  });
+
+  setTimeout(() => {
+    pcMoves();
+  }, 5000);
 };
 
 const specialAttackPlayer = () => {
@@ -163,13 +170,13 @@ let hPlayer = null;
 // let potionsCount = fighters[choosePlayer].potions.count;
 const potionsPlayer = () => {
   const divHealthPlayer = document.querySelector(".healthPlayer");
-  hPlayer = fighters[choosePlayer].health;
+  // hPlayer = fighters[choosePlayer].health;
 
   potionsCount--;
   const AllFightButtons = document.querySelectorAll(".fightButton");
   AllFightButtons[3].textContent = "Potions(" + potionsCount + ")";
-  fighters[choosePlayer].health =
-    hPlayer + fighters[choosePlayer].potions.value;
+
+  hPlayer = hPlayer + fighters[choosePlayer].potions.value;
 
   divHealthPlayer.textContent = hPlayer;
 
@@ -178,6 +185,27 @@ const potionsPlayer = () => {
   }
   console.log(hPlayer);
   console.log(potionsCount);
+};
+
+const pcMoves = () => {
+  const divHealthPlayer = document.querySelector(".healthPlayer");
+  const AllFightButtons = document.querySelectorAll(".fightButton");
+  // hPlayer = fighters[choosePlayer].health;
+  console.log(hPlayer);
+  hPlayer =
+    hPlayer -
+    Math.floor(Math.random() * fighters.length) -
+    fighters[choosePc].attack;
+  console.log(hPlayer);
+
+  divHealthPlayer.textContent = hPlayer;
+  AllFightButtons.forEach((item) => {
+    item.removeAttribute("disabled");
+  });
+
+  if (hPlayer > 75) {
+    AllFightButtons[3].setAttribute("disabled", true);
+  }
 };
 
 const startGame = () => {
@@ -199,6 +227,7 @@ const startGame = () => {
     AllFightButtons[2].addEventListener("click", criticAttackPlayer);
 
     potionsCount = fighters[choosePlayer].potions.count;
+    hPlayer = fighters[choosePlayer].health;
 
     AllFightButtons[3].textContent = "Potions(" + potionsCount + ")";
     AllFightButtons[3].addEventListener("click", potionsPlayer);
