@@ -127,15 +127,33 @@ const renderFight = () => {
 let hPc = fighters[choosePc].health;
 
 const attackPlayer = () => {
-  const divH = document.querySelector(".healthPc");
+  const divHealthPC = document.querySelector(".healthPc");
 
   hPc =
     hPc -
     (Math.floor(Math.random() * fighters.length) +
       fighters[choosePlayer].attack);
 
-  divH.textContent = hPc;
-  console.log(hPc);
+  divHealthPC.textContent = hPc;
+};
+
+const specialAttackPlayer = () => {
+  const divHealthPC = document.querySelector(".healthPc");
+
+  hPc =
+    hPc -
+    (Math.floor(Math.random() * fighters.length) +
+      fighters[choosePlayer].specialAttack);
+
+  divHealthPC.textContent = hPc;
+};
+
+const criticAttackPlayer = () => {
+  const divHealthPC = document.querySelector(".healthPc");
+
+  hPc = hPc - fighters[choosePlayer].criticAttack.value;
+
+  divHealthPC.textContent = hPc;
 };
 
 const startGame = () => {
@@ -149,6 +167,12 @@ const startGame = () => {
     const AllFightButtons = document.querySelectorAll(".fightButton");
     AllFightButtons[0].textContent = "Attack";
     AllFightButtons[0].addEventListener("click", attackPlayer);
+
+    AllFightButtons[1].textContent = "Special Attack";
+    AllFightButtons[1].addEventListener("click", specialAttackPlayer);
+
+    AllFightButtons[2].textContent = fighters[choosePlayer].criticAttack.name;
+    AllFightButtons[2].addEventListener("click", criticAttackPlayer);
   }
 };
 startBtn.addEventListener("click", startGame);
