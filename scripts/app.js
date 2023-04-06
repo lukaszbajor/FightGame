@@ -157,18 +157,26 @@ const criticAttackPlayer = () => {
   const AllFightButtons = document.querySelectorAll(".fightButton");
   AllFightButtons[2].setAttribute("disabled", true);
 };
+
 let potionsCount = null;
+let hPlayer = null;
 // let potionsCount = fighters[choosePlayer].potions.count;
 const potionsPlayer = () => {
-  // potionsCount = fighters[choosePlayer].potions.count;
+  const divHealthPlayer = document.querySelector(".healthPlayer");
+  hPlayer = fighters[choosePlayer].health;
+
   potionsCount--;
   const AllFightButtons = document.querySelectorAll(".fightButton");
   AllFightButtons[3].textContent = "Potions(" + potionsCount + ")";
+  fighters[choosePlayer].health =
+    hPlayer + fighters[choosePlayer].potions.value;
 
-  if (potionsCount === 0) {
+  divHealthPlayer.textContent = hPlayer;
+
+  if (potionsCount === 0 || hPlayer > 75) {
     AllFightButtons[3].setAttribute("disabled", true);
   }
-
+  console.log(hPlayer);
   console.log(potionsCount);
 };
 
@@ -194,6 +202,10 @@ const startGame = () => {
 
     AllFightButtons[3].textContent = "Potions(" + potionsCount + ")";
     AllFightButtons[3].addEventListener("click", potionsPlayer);
+
+    if (fighters[choosePlayer].health > 85) {
+      AllFightButtons[3].setAttribute("disabled", true);
+    }
   }
 };
 startBtn.addEventListener("click", startGame);
