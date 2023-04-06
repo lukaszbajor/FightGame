@@ -74,6 +74,8 @@ allPlayers.forEach((item) => {
   });
 });
 
+let choosePc = Math.floor(Math.random() * fighters.length);
+
 const renderFight = () => {
   // Create character user choose
   const fightMain = document.createElement("div");
@@ -85,7 +87,7 @@ const renderFight = () => {
   userPlayer.classList.add("item");
   userPlayer.innerHTML = `
         <img src="${fighters[choosePlayer].avatar}" class="itemAvatar"/>
-        <div class="health">${fighters[choosePlayer].health}</div>
+        <div class="healthPlayer">${fighters[choosePlayer].health}</div>
         <p class="desc"><b>Type: </b>${fighters[choosePlayer].name}</p>
         <p class="desc">Description: ${fighters[choosePlayer].shortDesc}</p>
         <p class="desc">Best skill: ${fighters[choosePlayer].criticAttack.name}</p>
@@ -93,13 +95,12 @@ const renderFight = () => {
   characters.appendChild(userPlayer);
 
   //Create character pc choose
-  let choosePc = Math.floor(Math.random() * fighters.length);
 
   const pcPlayer = document.createElement("div");
   pcPlayer.classList.add("item");
   pcPlayer.innerHTML = `
       <img src="${fighters[choosePc].avatar}" class="itemAvatar"/>
-      <div class="health">${fighters[choosePc].health}</div>
+      <div class="healthPc">${fighters[choosePc].health}</div>
       <p class="desc"><b>Type: </b>${fighters[choosePc].name}</p>
       <p class="desc">Description: ${fighters[choosePc].shortDesc}</p>
       <p class="desc">Best skill: ${fighters[choosePc].criticAttack.name}</p>
@@ -123,6 +124,15 @@ const renderFight = () => {
 
   rootElement.appendChild(fightMain);
 };
+let hPc = fighters[choosePc].health;
+const attackXD = () => {
+  const divH = document.querySelector(".healthPc");
+
+  hPc = hPc - 1;
+
+  divH.textContent = hPc;
+  console.log(hPc);
+};
 
 const startGame = () => {
   if (currentElement === null) {
@@ -132,6 +142,9 @@ const startGame = () => {
     startBtn.style.display = "none";
     console.log(currentElement.attributes["data-id"]);
     renderFight();
+    const AllFightButtons = document.querySelectorAll(".fightButton");
+    AllFightButtons[0].textContent = "Attack";
+    AllFightButtons[0].addEventListener("click", attackXD);
   }
 };
 startBtn.addEventListener("click", startGame);
