@@ -73,7 +73,7 @@ allPlayers.forEach((item) => {
     currentElement = item;
   });
 });
-
+let choosePlayer = null;
 let choosePc = Math.floor(Math.random() * fighters.length);
 
 const renderFight = () => {
@@ -82,7 +82,7 @@ const renderFight = () => {
   fightMain.classList.add("fightBox");
   const characters = document.createElement("div");
   characters.classList.add("characters");
-  let choosePlayer = currentElement.attributes["data-id"].value - 1;
+  choosePlayer = currentElement.attributes["data-id"].value - 1;
   const userPlayer = document.createElement("div");
   userPlayer.classList.add("item");
   userPlayer.innerHTML = `
@@ -125,10 +125,14 @@ const renderFight = () => {
   rootElement.appendChild(fightMain);
 };
 let hPc = fighters[choosePc].health;
-const attackXD = () => {
+
+const attackPlayer = () => {
   const divH = document.querySelector(".healthPc");
 
-  hPc = hPc - 1;
+  hPc =
+    hPc -
+    (Math.floor(Math.random() * fighters.length) +
+      fighters[choosePlayer].attack);
 
   divH.textContent = hPc;
   console.log(hPc);
@@ -144,7 +148,7 @@ const startGame = () => {
     renderFight();
     const AllFightButtons = document.querySelectorAll(".fightButton");
     AllFightButtons[0].textContent = "Attack";
-    AllFightButtons[0].addEventListener("click", attackXD);
+    AllFightButtons[0].addEventListener("click", attackPlayer);
   }
 };
 startBtn.addEventListener("click", startGame);
