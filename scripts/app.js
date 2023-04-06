@@ -11,7 +11,7 @@ const fighters = [
     defence: 5,
     criticAttack: { name: "Czar złości", value: 20 },
     health: 100,
-    potions: 3,
+    potions: { count: 3, value: 15 },
     avatar: "./images/wizard-g090ae14b0_640.png",
   },
   {
@@ -23,7 +23,7 @@ const fighters = [
     defence: 3,
     criticAttack: { name: "Headshot", value: 20 },
     health: 100,
-    potions: 3,
+    potions: { count: 2, value: 15 },
     avatar: "./images/army-g76cac165d_640.png",
   },
   {
@@ -35,7 +35,7 @@ const fighters = [
     defence: 10,
     criticAttack: { name: "Zatruta strzała", value: 20 },
     health: 100,
-    potions: 3,
+    potions: { count: 4, value: 15 },
     avatar: "./images/hunter-gc9223ba2f_640.png",
   },
 ];
@@ -111,7 +111,7 @@ const renderFight = () => {
   //Create buttons to fight and event log
   const fightButtons = document.createElement("div");
   fightButtons.classList.add("fightButtons");
-  for (i = 1; i <= 3; i++) {
+  for (i = 0; i <= 3; i++) {
     const fightButton = document.createElement("button");
     fightButton.classList.add("fightButton");
     fightButtons.appendChild(fightButton);
@@ -154,6 +154,22 @@ const criticAttackPlayer = () => {
   hPc = hPc - fighters[choosePlayer].criticAttack.value;
 
   divHealthPC.textContent = hPc;
+  const AllFightButtons = document.querySelectorAll(".fightButton");
+  AllFightButtons[2].setAttribute("disabled", true);
+};
+let potionsCount = null;
+// let potionsCount = fighters[choosePlayer].potions.count;
+const potionsPlayer = () => {
+  // potionsCount = fighters[choosePlayer].potions.count;
+  potionsCount--;
+  const AllFightButtons = document.querySelectorAll(".fightButton");
+  AllFightButtons[3].textContent = "Potions(" + potionsCount + ")";
+
+  if (potionsCount === 0) {
+    AllFightButtons[3].setAttribute("disabled", true);
+  }
+
+  console.log(potionsCount);
 };
 
 const startGame = () => {
@@ -173,6 +189,11 @@ const startGame = () => {
 
     AllFightButtons[2].textContent = fighters[choosePlayer].criticAttack.name;
     AllFightButtons[2].addEventListener("click", criticAttackPlayer);
+
+    potionsCount = fighters[choosePlayer].potions.count;
+
+    AllFightButtons[3].textContent = "Potions(" + potionsCount + ")";
+    AllFightButtons[3].addEventListener("click", potionsPlayer);
   }
 };
 startBtn.addEventListener("click", startGame);
