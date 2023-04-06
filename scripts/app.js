@@ -142,6 +142,10 @@ const attackPlayer = () => {
   setTimeout(() => {
     pcMoves();
   }, 5000);
+  const eventLog = document.querySelector(".eventLog");
+  const action = document.createElement("li");
+  action.textContent = "Atakuje " + fighters[choosePlayer].name;
+  eventLog.appendChild(action);
 };
 
 const specialAttackPlayer = () => {
@@ -206,6 +210,10 @@ const pcMoves = () => {
   if (hPlayer > 75) {
     AllFightButtons[3].setAttribute("disabled", true);
   }
+  const eventLog = document.querySelector(".eventLog");
+  const action = document.createElement("li");
+  action.textContent = "Atakuje " + fighters[choosePc].name;
+  eventLog.appendChild(action);
 };
 
 const startGame = () => {
