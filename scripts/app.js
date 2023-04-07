@@ -144,7 +144,8 @@ const attackPlayer = () => {
   }, 5000);
   const eventLog = document.querySelector(".eventLog");
   const action = document.createElement("li");
-  action.textContent = "Atakuje " + fighters[choosePlayer].name;
+  action.textContent =
+    "Atakuje " + fighters[choosePlayer].name + "poprzez zwykły atak";
   eventLog.appendChild(action);
 };
 
@@ -157,6 +158,15 @@ const specialAttackPlayer = () => {
       fighters[choosePlayer].specialAttack);
 
   divHealthPC.textContent = hPc;
+
+  setTimeout(() => {
+    pcMoves();
+  }, 5000);
+  const eventLog = document.querySelector(".eventLog");
+  const action = document.createElement("li");
+  action.textContent =
+    "Atakuje " + fighters[choosePlayer].name + "poprzez atak specjalny";
+  eventLog.appendChild(action);
 };
 
 const criticAttackPlayer = () => {
@@ -166,7 +176,19 @@ const criticAttackPlayer = () => {
 
   divHealthPC.textContent = hPc;
   const AllFightButtons = document.querySelectorAll(".fightButton");
-  AllFightButtons[2].setAttribute("disabled", true);
+  AllFightButtons[2].style.display = "none";
+
+  setTimeout(() => {
+    pcMoves();
+  }, 5000);
+  const eventLog = document.querySelector(".eventLog");
+  const action = document.createElement("li");
+  action.textContent =
+    "Atakuje " +
+    fighters[choosePlayer].name +
+    "poprzez " +
+    fighters[choosePlayer].criticAttack.name;
+  eventLog.appendChild(action);
 };
 
 let potionsCount = null;
@@ -184,11 +206,22 @@ const potionsPlayer = () => {
 
   divHealthPlayer.textContent = hPlayer;
 
-  if (potionsCount === 0 || hPlayer > 75) {
+  if (hPlayer > 75) {
+    AllFightButtons[3].setAttribute("disabled", true);
+  } else if (potionsCount === 0) {
     AllFightButtons[3].setAttribute("disabled", true);
   }
   console.log(hPlayer);
   console.log(potionsCount);
+  const eventLog = document.querySelector(".eventLog");
+  const action = document.createElement("li");
+  action.textContent =
+    fighters[choosePlayer].name + " użył mikstury uzdarwiającej";
+  eventLog.appendChild(action);
+
+  setTimeout(() => {
+    pcMoves();
+  }, 5000);
 };
 
 let countPotionsPc = fighters[choosePc].potions.count;
@@ -277,6 +310,10 @@ const pcMoves = () => {
   }
 
   eventLog.appendChild(action);
+
+  if (potionsCount === 0) {
+    AllFightButtons[3].setAttribute("disabled", true);
+  }
 };
 
 const startGame = () => {
