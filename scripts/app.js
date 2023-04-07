@@ -205,14 +205,22 @@ const pcMoves = () => {
 
   let actionNumber = Math.floor(Math.random() * 4);
 
-  if (actionNumber === 2 && countCriticAttackPC === 1) {
+  if (
+    actionNumber === 2 &&
+    countCriticAttackPC === 1 &&
+    hPc < 75 &&
+    countPotionsPc !== 0
+  ) {
     actionNumber = Math.floor(Math.random() * 2) || 3;
-  }
-  if (actionNumber === 2 && countCriticAttackPC === 1 && hPc > 75) {
+  } else if (
+    actionNumber === 2 &&
+    countCriticAttackPC === 1 &&
+    hPc > 75 &&
+    countPotionsPc !== 0
+  ) {
     actionNumber = Math.floor(Math.random() * 1);
-  }
-  if (hPc < 75) {
-    actionNumber = Math.floor(Math.random() * 3);
+  } else if (hPc > 75) {
+    actionNumber = Math.floor(Math.random() * 3 && countPotionsPc !== 0);
   }
   console.log(actionNumber);
 
