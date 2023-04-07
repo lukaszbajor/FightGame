@@ -195,14 +195,30 @@ const pcMoves = () => {
   const divHealthPlayer = document.querySelector(".healthPlayer");
   const AllFightButtons = document.querySelectorAll(".fightButton");
   // hPlayer = fighters[choosePlayer].health;
-  console.log(hPlayer);
-  hPlayer =
-    hPlayer -
-    Math.floor(Math.random() * fighters.length) -
-    fighters[choosePc].attack;
-  console.log(hPlayer);
+  // console.log(hPlayer);
 
-  divHealthPlayer.textContent = hPlayer;
+  //Losowanie akcji
+
+  const actionNumber = Math.floor(Math.random() * 3);
+  console.log(actionNumber);
+
+  if (actionNumber === 0) {
+    hPlayer =
+      hPlayer -
+      Math.floor(Math.random() * fighters.length) -
+      fighters[choosePc].attack;
+    // console.log(hPlayer);
+
+    divHealthPlayer.textContent = hPlayer;
+  } else if (actionNumber === 1) {
+    hPlayer =
+      hPlayer -
+      (Math.floor(Math.random() * fighters.length) +
+        fighters[choosePc].specialAttack);
+
+    divHealthPlayer.textContent = hPlayer;
+  }
+
   AllFightButtons.forEach((item) => {
     item.removeAttribute("disabled");
   });
@@ -212,7 +228,24 @@ const pcMoves = () => {
   }
   const eventLog = document.querySelector(".eventLog");
   const action = document.createElement("li");
-  action.textContent = "Atakuje " + fighters[choosePc].name;
+
+  if (actionNumber === 0) {
+    action.textContent =
+      "Atakuje " + fighters[choosePc].name + " poprzez zwykły atak";
+  } else if (actionNumber === 1) {
+    action.textContent =
+      "Atakuje " + fighters[choosePc].name + " poprzez atak specjalny";
+  } else if (actionNumber === 2) {
+    action.textContent =
+      "Atakuje " +
+      fighters[choosePc].name +
+      " poprzez niesamowitą zdolność" +
+      fighters[choosePc].criticAttack.name;
+  } else {
+    action.textContent =
+      fighters[choosePc].name + " użył mikstury uzdarwiającej";
+  }
+
   eventLog.appendChild(action);
 };
 
