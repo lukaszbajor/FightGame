@@ -191,15 +191,29 @@ const potionsPlayer = () => {
   console.log(potionsCount);
 };
 
+let countPotionsPc = fighters[choosePc].potions.count;
+let countCriticAttackPC = 0;
+
 const pcMoves = () => {
   const divHealthPlayer = document.querySelector(".healthPlayer");
+  const divHealthPC = document.querySelector(".healthPc");
   const AllFightButtons = document.querySelectorAll(".fightButton");
   // hPlayer = fighters[choosePlayer].health;
   // console.log(hPlayer);
 
   //Losowanie akcji
 
-  const actionNumber = Math.floor(Math.random() * 3);
+  let actionNumber = Math.floor(Math.random() * 4);
+
+  if (actionNumber === 2 && countCriticAttackPC === 1) {
+    actionNumber = Math.floor(Math.random() * 2) || 3;
+  }
+  if (actionNumber === 2 && countCriticAttackPC === 1 && hPc > 75) {
+    actionNumber = Math.floor(Math.random() * 1);
+  }
+  if (hPc < 75) {
+    actionNumber = Math.floor(Math.random() * 3);
+  }
   console.log(actionNumber);
 
   if (actionNumber === 0) {
@@ -217,6 +231,14 @@ const pcMoves = () => {
         fighters[choosePc].specialAttack);
 
     divHealthPlayer.textContent = hPlayer;
+  } else if (actionNumber === 2) {
+    hPlayer = hPlayer - fighters[choosePc].criticAttack.value;
+    countCriticAttackPC = 1;
+    divHealthPlayer.textContent = hPlayer;
+  } else {
+    hPc = hPc + fighters[choosePc].potions.value;
+
+    divHealthPC.textContent = hPc;
   }
 
   AllFightButtons.forEach((item) => {
