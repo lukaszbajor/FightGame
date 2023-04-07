@@ -159,6 +159,11 @@ const specialAttackPlayer = () => {
 
   divHealthPC.textContent = hPc;
 
+  const AllFightButtons = document.querySelectorAll(".fightButton");
+  AllFightButtons.forEach((item) => {
+    item.setAttribute("disabled", true);
+  });
+
   setTimeout(() => {
     pcMoves();
   }, 5000);
@@ -177,6 +182,10 @@ const criticAttackPlayer = () => {
   divHealthPC.textContent = hPc;
   const AllFightButtons = document.querySelectorAll(".fightButton");
   AllFightButtons[2].style.display = "none";
+
+  AllFightButtons.forEach((item) => {
+    item.setAttribute("disabled", true);
+  });
 
   setTimeout(() => {
     pcMoves();
@@ -310,10 +319,6 @@ const pcMoves = () => {
   }
 
   eventLog.appendChild(action);
-
-  if (potionsCount === 0) {
-    AllFightButtons[3].setAttribute("disabled", true);
-  }
 };
 
 const startGame = () => {
