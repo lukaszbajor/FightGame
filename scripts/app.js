@@ -144,9 +144,19 @@ const attackPlayer = () => {
   }, 5000);
   const eventLog = document.querySelector(".eventLog");
   const action = document.createElement("li");
+  const winText = document.createElement("li");
   action.textContent =
     "Atakuje " + fighters[choosePlayer].name + "poprzez zwykły atak";
   eventLog.appendChild(action);
+
+  if (hPc <= 0) {
+    divHealthPC.textContent = 0;
+    winText.textContent = fighters[choosePlayer].name + " wygrał pojedynek!";
+    eventLog.appendChild(winText);
+    AllFightButtons.forEach((item) => {
+      item.setAttribute("disabled", true);
+    });
+  }
 };
 
 const specialAttackPlayer = () => {
@@ -169,9 +179,19 @@ const specialAttackPlayer = () => {
   }, 5000);
   const eventLog = document.querySelector(".eventLog");
   const action = document.createElement("li");
+  const winText = document.createElement("li");
   action.textContent =
     "Atakuje " + fighters[choosePlayer].name + "poprzez atak specjalny";
   eventLog.appendChild(action);
+
+  if (hPc <= 0) {
+    divHealthPC.textContent = 0;
+    winText.textContent = fighters[choosePlayer].name + " wygrał pojedynek!";
+    eventLog.appendChild(winText);
+    AllFightButtons.forEach((item) => {
+      item.setAttribute("disabled", true);
+    });
+  }
 };
 
 const criticAttackPlayer = () => {
@@ -192,12 +212,22 @@ const criticAttackPlayer = () => {
   }, 5000);
   const eventLog = document.querySelector(".eventLog");
   const action = document.createElement("li");
+  const winText = document.createElement("li");
   action.textContent =
     "Atakuje " +
     fighters[choosePlayer].name +
     "poprzez " +
     fighters[choosePlayer].criticAttack.name;
   eventLog.appendChild(action);
+
+  if (hPc <= 0) {
+    divHealthPC.textContent = 0;
+    winText.textContent = fighters[choosePlayer].name + " wygrał pojedynek!";
+    eventLog.appendChild(winText);
+    AllFightButtons.forEach((item) => {
+      item.setAttribute("disabled", true);
+    });
+  }
 };
 
 let potionsCount = null;
@@ -300,6 +330,7 @@ const pcMoves = () => {
   }
   const eventLog = document.querySelector(".eventLog");
   const action = document.createElement("li");
+  const winText = document.createElement("li");
 
   if (actionNumber === 0) {
     action.textContent =
@@ -319,7 +350,17 @@ const pcMoves = () => {
   }
 
   eventLog.appendChild(action);
+
+  if (hPlayer <= 0) {
+    divHealthPlayer.textContent = 0;
+    winText.textContent = fighters[choosePc].name + " wygrał pojedynek!";
+    eventLog.appendChild(winText);
+    AllFightButtons.forEach((item) => {
+      item.setAttribute("disabled", true);
+    });
+  }
 };
+// const AllFightButtons = document.querySelectorAll(".fightButton");
 
 const startGame = () => {
   if (currentElement === null) {
