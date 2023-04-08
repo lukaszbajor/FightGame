@@ -59,3 +59,36 @@
 .active {
   border-color: #b045b0;
 }
+
+.healthPc,
+.healthPlayer {
+  position: relative;
+  margin-bottom: 2px;
+  width: 100%;
+  text-align: center;
+  border: 1px solid black;
+  background-color: #922020;
+  color: white;
+}
+.healthPc::before,
+.healthPlayer::before {
+  content: "";
+  /* display: block; */
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #0f186a6d;
+  /* animation: progress-bar-animation 2s; */
+  /* z-index: -1; */
+}
+
+/* @keyframes progress-bar-animation {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0;
+  }
+} */

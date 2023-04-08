@@ -87,7 +87,7 @@ const renderFight = () => {
   userPlayer.classList.add("item");
   userPlayer.innerHTML = `
         <img src="${fighters[choosePlayer].avatar}" class="itemAvatar"/>
-        <div class="healthPlayer">${fighters[choosePlayer].health}</div>
+        <div class="healthPlayer" data-points=${fighters[choosePlayer].health}>${fighters[choosePlayer].health}</div>
         <p class="desc"><b>Type: </b>${fighters[choosePlayer].name}</p>
         <p class="desc">Description: ${fighters[choosePlayer].shortDesc}</p>
         <p class="desc">Best skill: ${fighters[choosePlayer].criticAttack.name}</p>
@@ -100,13 +100,14 @@ const renderFight = () => {
   pcPlayer.classList.add("item");
   pcPlayer.innerHTML = `
       <img src="${fighters[choosePc].avatar}" class="itemAvatar"/>
-      <div class="healthPc">${fighters[choosePc].health}</div>
+      <div class="healthPc" data-points=${fighters[choosePc].health}>${fighters[choosePc].health}</div>
       <p class="desc"><b>Type: </b>${fighters[choosePc].name}</p>
       <p class="desc">Description: ${fighters[choosePc].shortDesc}</p>
       <p class="desc">Best skill: ${fighters[choosePc].criticAttack.name}</p>
       `;
   characters.appendChild(pcPlayer);
   fightMain.appendChild(characters);
+  // const divHealthPC = document.querySelector(".healthPc");
 
   //Create buttons to fight and event log
   const fightButtons = document.createElement("div");
@@ -125,23 +126,25 @@ const renderFight = () => {
   rootElement.appendChild(fightMain);
 };
 let hPc = fighters[choosePc].health;
+let points = null;
 
 const attackPlayer = () => {
   const divHealthPC = document.querySelector(".healthPc");
+  
+
   hPc =
     hPc -
     (Math.floor(Math.random() * fighters.length) +
       fighters[choosePlayer].attack);
 
-  divHealthPC.textContent = hPc;
+  // divHealthPC.textContent = hPc;
+  // points = hPc;
+
   const AllFightButtons = document.querySelectorAll(".fightButton");
   AllFightButtons.forEach((item) => {
     item.setAttribute("disabled", true);
   });
 
-  setTimeout(() => {
-    pcMoves();
-  }, 5000);
   const eventLog = document.querySelector(".eventLog");
   const action = document.createElement("li");
   const winText = document.createElement("li");
@@ -156,7 +159,13 @@ const attackPlayer = () => {
     AllFightButtons.forEach((item) => {
       item.setAttribute("disabled", true);
     });
+  } else {
+    setTimeout(() => {
+      pcMoves();
+    }, 5000);
   }
+
+  // divHealthPCPseudoElement.style.width = -50 + "%";
 };
 
 const specialAttackPlayer = () => {
@@ -174,9 +183,6 @@ const specialAttackPlayer = () => {
     item.setAttribute("disabled", true);
   });
 
-  setTimeout(() => {
-    pcMoves();
-  }, 5000);
   const eventLog = document.querySelector(".eventLog");
   const action = document.createElement("li");
   const winText = document.createElement("li");
@@ -191,11 +197,16 @@ const specialAttackPlayer = () => {
     AllFightButtons.forEach((item) => {
       item.setAttribute("disabled", true);
     });
+  } else {
+    setTimeout(() => {
+      pcMoves();
+    }, 5000);
   }
 };
 
 const criticAttackPlayer = () => {
   const divHealthPC = document.querySelector(".healthPc");
+  const points = divHealthPC.dataset.points;
 
   hPc = hPc - fighters[choosePlayer].criticAttack.value;
 
@@ -207,9 +218,6 @@ const criticAttackPlayer = () => {
     item.setAttribute("disabled", true);
   });
 
-  setTimeout(() => {
-    pcMoves();
-  }, 5000);
   const eventLog = document.querySelector(".eventLog");
   const action = document.createElement("li");
   const winText = document.createElement("li");
@@ -227,7 +235,12 @@ const criticAttackPlayer = () => {
     AllFightButtons.forEach((item) => {
       item.setAttribute("disabled", true);
     });
+  } else {
+    setTimeout(() => {
+      pcMoves();
+    }, 5000);
   }
+  divHealthPC.style.setProperty("--points", points);
 };
 
 let potionsCount = null;
@@ -370,6 +383,7 @@ const startGame = () => {
     startBtn.style.display = "none";
     console.log(currentElement.attributes["data-id"]);
     renderFight();
+
     const AllFightButtons = document.querySelectorAll(".fightButton");
     AllFightButtons[0].textContent = "Attack";
     AllFightButtons[0].addEventListener("click", attackPlayer);
