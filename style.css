@@ -59,13 +59,14 @@
 .active {
   border-color: #b045b0;
 }
-.healthPc {
+.healthPc,
+.healthPlayer {
   position: relative;
   font-weight: bold;
   z-index: 2;
 }
 .boxHealthPC,
-.healthPlayer {
+.boxHealthPlayer {
   position: relative;
   margin-bottom: 2px;
   width: 100%;
@@ -76,7 +77,8 @@
   z-index: 0;
   /* transition: width 1s; */
 }
-.progressBar {
+.progressBarPc,
+.progressBarPlayer {
   position: absolute;
   top: 0;
   left: 0;

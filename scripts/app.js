@@ -87,7 +87,7 @@ const renderFight = () => {
   userPlayer.classList.add("item");
   userPlayer.innerHTML = `
         <img src="${fighters[choosePlayer].avatar}" class="itemAvatar"/>
-        <div class="healthPlayer" data-points=${fighters[choosePlayer].health}>${fighters[choosePlayer].health}</div>
+        <div class="boxHealthPlayer"><div class="progressBarPlayer"></div><p class="healthPlayer">${fighters[choosePlayer].health}</p></div>
         <p class="desc"><b>Type: </b>${fighters[choosePlayer].name}</p>
         <p class="desc">Description: ${fighters[choosePlayer].shortDesc}</p>
         <p class="desc">Best skill: ${fighters[choosePlayer].criticAttack.name}</p>
@@ -100,7 +100,7 @@ const renderFight = () => {
   pcPlayer.classList.add("item");
   pcPlayer.innerHTML = `
       <img src="${fighters[choosePc].avatar}" class="itemAvatar"/>
-      <div class="boxHealthPC"><div class="progressBar"></div><p class="healthPc">${fighters[choosePc].health}</p></div>
+      <div class="boxHealthPC"><div class="progressBarPc"></div><p class="healthPc">${fighters[choosePc].health}</p></div>
       <p class="desc"><b>Type: </b>${fighters[choosePc].name}</p>
       <p class="desc">Description: ${fighters[choosePc].shortDesc}</p>
       <p class="desc">Best skill: ${fighters[choosePc].criticAttack.name}</p>
@@ -129,7 +129,7 @@ let hPc = fighters[choosePc].health;
 
 const attackPlayer = () => {
   const divHealthPC = document.querySelector(".healthPc");
-  const progressBar = document.querySelector(".progressBar");
+  const progressBarPc = document.querySelector(".progressBarPc");
   console.log(divHealthPC);
   hPc =
     hPc -
@@ -162,11 +162,12 @@ const attackPlayer = () => {
     }, 5000);
   }
 
-  progressBar.style.width = hPc + "%";
+  progressBarPc.style.width = hPc + "%";
 };
 
 const specialAttackPlayer = () => {
   const divHealthPC = document.querySelector(".healthPc");
+  const progressBarPc = document.querySelector(".progressBarPc");
 
   hPc =
     hPc -
@@ -199,11 +200,12 @@ const specialAttackPlayer = () => {
       pcMoves();
     }, 5000);
   }
+  progressBarPc.style.width = hPc + "%";
 };
 
 const criticAttackPlayer = () => {
   const divHealthPC = document.querySelector(".healthPc");
-  const points = divHealthPC.dataset.points;
+  const progressBarPc = document.querySelector(".progressBarPc");
 
   hPc = hPc - fighters[choosePlayer].criticAttack.value;
 
@@ -237,7 +239,7 @@ const criticAttackPlayer = () => {
       pcMoves();
     }, 5000);
   }
-  divHealthPC.style.setProperty("--points", points);
+  progressBarPc.style.width = hPc + "%";
 };
 
 let potionsCount = null;
@@ -245,6 +247,7 @@ let hPlayer = null;
 // let potionsCount = fighters[choosePlayer].potions.count;
 const potionsPlayer = () => {
   const divHealthPlayer = document.querySelector(".healthPlayer");
+  const progressBarPlayer = document.querySelector(".progressBarPlayer");
   // hPlayer = fighters[choosePlayer].health;
 
   potionsCount--;
@@ -271,6 +274,7 @@ const potionsPlayer = () => {
   setTimeout(() => {
     pcMoves();
   }, 5000);
+  progressBarPlayer.style.width = hPlayer + "%";
 };
 
 let countPotionsPc = fighters[choosePc].potions.count;
@@ -280,6 +284,8 @@ const pcMoves = () => {
   const divHealthPlayer = document.querySelector(".healthPlayer");
   const divHealthPC = document.querySelector(".healthPc");
   const AllFightButtons = document.querySelectorAll(".fightButton");
+  const progressBarPc = document.querySelector(".progressBarPc");
+  const progressBarPlayer = document.querySelector(".progressBarPlayer");
   // hPlayer = fighters[choosePlayer].health;
   // console.log(hPlayer);
 
@@ -345,18 +351,22 @@ const pcMoves = () => {
   if (actionNumber === 0) {
     action.textContent =
       "Atakuje " + fighters[choosePc].name + " poprzez zwykły atak";
+    progressBarPlayer.style.width = hPlayer + "%";
   } else if (actionNumber === 1) {
     action.textContent =
       "Atakuje " + fighters[choosePc].name + " poprzez atak specjalny";
+    progressBarPlayer.style.width = hPlayer + "%";
   } else if (actionNumber === 2) {
     action.textContent =
       "Atakuje " +
       fighters[choosePc].name +
       " poprzez niesamowitą zdolność" +
       fighters[choosePc].criticAttack.name;
+    progressBarPlayer.style.width = hPlayer + "%";
   } else {
     action.textContent =
       fighters[choosePc].name + " użył mikstury uzdarwiającej";
+    progressBarPc.style.width = hPc + "%";
   }
 
   eventLog.appendChild(action);
