@@ -100,7 +100,7 @@ const renderFight = () => {
   pcPlayer.classList.add("item");
   pcPlayer.innerHTML = `
       <img src="${fighters[choosePc].avatar}" class="itemAvatar"/>
-      <div class="healthPc" data-points=${fighters[choosePc].health}>${fighters[choosePc].health}</div>
+      <div class="boxHealthPC"><div class="progressBar"></div><p class="healthPc">${fighters[choosePc].health}</p></div>
       <p class="desc"><b>Type: </b>${fighters[choosePc].name}</p>
       <p class="desc">Description: ${fighters[choosePc].shortDesc}</p>
       <p class="desc">Best skill: ${fighters[choosePc].criticAttack.name}</p>
@@ -126,20 +126,17 @@ const renderFight = () => {
   rootElement.appendChild(fightMain);
 };
 let hPc = fighters[choosePc].health;
-let points = null;
 
 const attackPlayer = () => {
   const divHealthPC = document.querySelector(".healthPc");
-  
-
+  const progressBar = document.querySelector(".progressBar");
+  console.log(divHealthPC);
   hPc =
     hPc -
     (Math.floor(Math.random() * fighters.length) +
       fighters[choosePlayer].attack);
 
-  // divHealthPC.textContent = hPc;
-  // points = hPc;
-
+  divHealthPC.textContent = hPc;
   const AllFightButtons = document.querySelectorAll(".fightButton");
   AllFightButtons.forEach((item) => {
     item.setAttribute("disabled", true);
@@ -165,7 +162,7 @@ const attackPlayer = () => {
     }, 5000);
   }
 
-  // divHealthPCPseudoElement.style.width = -50 + "%";
+  progressBar.style.width = hPc + "%";
 };
 
 const specialAttackPlayer = () => {
