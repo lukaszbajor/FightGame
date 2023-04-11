@@ -1,5 +1,6 @@
 const rootElement = document.querySelector("#root");
-const startBtn = document.querySelector(".start");
+const startBox = document.querySelector(".start");
+const startBtn = document.querySelector(".startBtn");
 
 const fighters = [
   {
@@ -38,6 +39,18 @@ const fighters = [
     potions: { count: 4, value: 15 },
     avatar: "./images/hunter-gc9223ba2f_640.png",
   },
+  {
+    id: "4",
+    name: "Mummy",
+    shortDesc: "Lorem ipsum",
+    attack: 10,
+    specialAttack: 13,
+    defence: 11,
+    criticAttack: { name: "Związanie umysłu", value: 22 },
+    health: 100,
+    potions: { count: 2, value: 15 },
+    avatar: "./images/mummy-g1c81f21c2_640.png",
+  },
 ];
 
 const renderFighters = () => {
@@ -49,9 +62,9 @@ const renderFighters = () => {
     fightersItem.setAttribute("data-id", fighter.id);
     fightersItem.innerHTML = `
         <img src="${fighter.avatar}" class="itemAvatar"/>
-        <p class="desc"><b>Type: </b>${fighter.name}</p>
-        <p class="desc">Description: ${fighter.shortDesc}</p>
-        <p class="desc">Best skill: ${fighter.criticAttack.name}</p>
+        <p class="desc"><b>${fighter.name}</b></p>
+        <p class="desc">${fighter.shortDesc}</p>
+        <p class="desc">${fighter.criticAttack.name}</p>
         `;
     fightersList.appendChild(fightersItem);
   });
@@ -391,7 +404,7 @@ const startGame = () => {
     alert("Wybierz character!");
   } else {
     rootElement.innerHTML = "";
-    startBtn.style.display = "none";
+    startBox.style.display = "none";
     console.log(currentElement.attributes["data-id"]);
     renderFight();
 
