@@ -156,6 +156,7 @@ const attackPlayer = () => {
     AllFightButtons.forEach((item) => {
       item.setAttribute("disabled", true);
     });
+    progressBarPc.style.display = "none";
   } else {
     setTimeout(() => {
       pcMoves();
@@ -195,6 +196,7 @@ const specialAttackPlayer = () => {
     AllFightButtons.forEach((item) => {
       item.setAttribute("disabled", true);
     });
+    progressBarPc.style.display = "none";
   } else {
     setTimeout(() => {
       pcMoves();
@@ -234,6 +236,7 @@ const criticAttackPlayer = () => {
     AllFightButtons.forEach((item) => {
       item.setAttribute("disabled", true);
     });
+    progressBarPc.style.display = "none";
   } else {
     setTimeout(() => {
       pcMoves();
@@ -378,6 +381,7 @@ const pcMoves = () => {
     AllFightButtons.forEach((item) => {
       item.setAttribute("disabled", true);
     });
+    progressBarPlayer.style.display = "none";
   }
 };
 // const AllFightButtons = document.querySelectorAll(".fightButton");
