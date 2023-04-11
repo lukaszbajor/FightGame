@@ -6,11 +6,11 @@ const fighters = [
   {
     id: "1",
     name: "Wizard",
-    shortDesc: "Lorem ipsum",
+    shortDesc: "Sorcerer from the east",
     attack: 8,
     specialAttack: 12,
     defence: 5,
-    criticAttack: { name: "Czar złości", value: 20 },
+    criticAttack: { name: "Rain of fire", value: 20 },
     health: 100,
     potions: { count: 3, value: 15 },
     avatar: "./images/wizard-g090ae14b0_640.png",
@@ -18,7 +18,7 @@ const fighters = [
   {
     id: "2",
     name: "Soldier",
-    shortDesc: "Lorem ipsum",
+    shortDesc: "Firearms Master",
     attack: 10,
     specialAttack: 12,
     defence: 3,
@@ -30,11 +30,11 @@ const fighters = [
   {
     id: "3",
     name: "Hunter",
-    shortDesc: "Lorem ipsum",
+    shortDesc: "Exquisite Archer",
     attack: 11,
     specialAttack: 12,
     defence: 10,
-    criticAttack: { name: "Zatruta strzała", value: 20 },
+    criticAttack: { name: "Poisoned arrow", value: 20 },
     health: 100,
     potions: { count: 4, value: 15 },
     avatar: "./images/hunter-gc9223ba2f_640.png",
@@ -42,11 +42,11 @@ const fighters = [
   {
     id: "4",
     name: "Mummy",
-    shortDesc: "Lorem ipsum",
+    shortDesc: "An ancient mummy",
     attack: 10,
     specialAttack: 13,
     defence: 11,
-    criticAttack: { name: "Związanie umysłu", value: 22 },
+    criticAttack: { name: "Mind binding", value: 22 },
     health: 100,
     potions: { count: 2, value: 15 },
     avatar: "./images/mummy-g1c81f21c2_640.png",
@@ -101,9 +101,9 @@ const renderFight = () => {
   userPlayer.innerHTML = `
         <img src="${fighters[choosePlayer].avatar}" class="itemAvatar"/>
         <div class="boxHealthPlayer"><div class="progressBarPlayer"></div><p class="healthPlayer">${fighters[choosePlayer].health}</p></div>
-        <p class="desc"><b>Type: </b>${fighters[choosePlayer].name}</p>
-        <p class="desc">Description: ${fighters[choosePlayer].shortDesc}</p>
-        <p class="desc">Best skill: ${fighters[choosePlayer].criticAttack.name}</p>
+        <p class="desc"><b>${fighters[choosePlayer].name}</b></p>
+        <p class="desc">${fighters[choosePlayer].shortDesc}</p>
+        <p class="desc">${fighters[choosePlayer].criticAttack.name}</p>
         `;
   characters.appendChild(userPlayer);
 
@@ -114,9 +114,9 @@ const renderFight = () => {
   pcPlayer.innerHTML = `
       <img src="${fighters[choosePc].avatar}" class="itemAvatar"/>
       <div class="boxHealthPC"><div class="progressBarPc"></div><p class="healthPc">${fighters[choosePc].health}</p></div>
-      <p class="desc"><b>Type: </b>${fighters[choosePc].name}</p>
-      <p class="desc">Description: ${fighters[choosePc].shortDesc}</p>
-      <p class="desc">Best skill: ${fighters[choosePc].criticAttack.name}</p>
+      <p class="desc"><b>${fighters[choosePc].name}</b></p>
+      <p class="desc">${fighters[choosePc].shortDesc}</p>
+      <p class="desc">${fighters[choosePc].criticAttack.name}</p>
       `;
   characters.appendChild(pcPlayer);
   fightMain.appendChild(characters);
@@ -177,6 +177,10 @@ const attackPlayer = () => {
   }
 
   progressBarPc.style.width = hPc + "%";
+
+  const items = document.querySelectorAll(".item");
+  items[0].classList.remove("active");
+  items[1].classList.add("active");
 };
 
 const specialAttackPlayer = () => {
@@ -214,8 +218,15 @@ const specialAttackPlayer = () => {
     setTimeout(() => {
       pcMoves();
     }, 5000);
+
+    const items = document.querySelectorAll(".item");
+    items[0].classList.remove("active");
+    items[1].classList.add("active");
   }
   progressBarPc.style.width = hPc + "%";
+  const items = document.querySelectorAll(".item");
+  items[0].classList.remove("active");
+  items[1].classList.add("active");
 };
 
 const criticAttackPlayer = () => {
@@ -256,6 +267,10 @@ const criticAttackPlayer = () => {
     }, 5000);
   }
   progressBarPc.style.width = hPc + "%";
+
+  const items = document.querySelectorAll(".item");
+  items[0].classList.remove("active");
+  items[1].classList.add("active");
 };
 
 let potionsCount = null;
@@ -291,6 +306,10 @@ const potionsPlayer = () => {
     pcMoves();
   }, 5000);
   progressBarPlayer.style.width = hPlayer + "%";
+
+  const items = document.querySelectorAll(".item");
+  items[0].classList.remove("active");
+  items[1].classList.add("active");
 };
 
 let countPotionsPc = fighters[choosePc].potions.count;
@@ -396,6 +415,10 @@ const pcMoves = () => {
     });
     progressBarPlayer.style.display = "none";
   }
+
+  const items = document.querySelectorAll(".item");
+  items[0].classList.add("active");
+  items[1].classList.remove("active");
 };
 // const AllFightButtons = document.querySelectorAll(".fightButton");
 
@@ -407,6 +430,9 @@ const startGame = () => {
     startBox.style.display = "none";
     console.log(currentElement.attributes["data-id"]);
     renderFight();
+
+    const items = document.querySelectorAll(".item");
+    items[0].classList.add("active");
 
     const AllFightButtons = document.querySelectorAll(".fightButton");
     AllFightButtons[0].textContent = "Attack";
