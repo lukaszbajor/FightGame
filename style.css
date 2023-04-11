@@ -8,7 +8,8 @@
 html,
 button {
   /* font-family: "Sedgwick Ave Display", cursive; */
-  font-family: "DynaPuff", cursive;
+  /* font-family: "DynaPuff", cursive; */
+  font-family: "Montserrat", sans-serif;
   font-size: 67.5%;
   outline: none;
   border: none;
@@ -29,14 +30,14 @@ body {
 }
 .logo {
   font-family: "Sedgwick Ave Display", cursive;
-  font-size: 2.2rem;
+  font-size: 4rem;
   color: white;
 }
 .theme {
   padding: 0.5em;
   font-size: 1.2rem;
+  font-weight: bold;
   cursor: pointer;
-  border-radius: 4px;
 }
 .list {
   margin: 20px;
@@ -100,6 +101,7 @@ body {
   border: 2px solid #3d3b3d;
   padding: 0.5em;
   background-color: #626062;
+
   font-size: 1.2rem;
   color: white;
 }
@@ -117,6 +119,7 @@ body {
   margin: 0 0.5em;
   padding: 1.2em;
   font-size: 1.2rem;
+  font-weight: bold;
 }
 
 .eventLogInfo {
@@ -127,7 +130,10 @@ body {
 }
 .active {
   border-color: white;
-  box-shadow: 5px 5px 5px rgba(68, 68, 68, 0.6);
+  /* box-shadow: 5px 5px 5px rgba(68, 68, 68, 0.6); */
+
+  box-shadow: 0 6px 20px 0 rgba(50, 50, 49, 0.837),
+    0 6px 20px 0 rgba(50, 50, 49, 0.837);
 }
 .healthPc,
 .healthPlayer {
@@ -178,12 +184,13 @@ body {
   align-items: center;
 }
 .info {
-  margin: 3px;
+  margin-top: 2em;
 }
 .startBtn {
   margin-top: 1em;
   padding: 0.5em;
   font-size: 1.2rem;
+  font-weight: bold;
 }
 .mainBtn {
   padding: 1em;
@@ -201,4 +208,10 @@ body {
 .fightButton:disabled {
   opacity: 0.2;
   cursor: default;
+}
+.winner {
+  /* box-shadow: 5px 5px 5px 5px gold; */
+  /* box-shadow: 14px 10px 14px gold, 0 10px 40px gold inset; */
+  box-shadow: 0 6px 20px 0 rgba(148, 130, 15, 0.837),
+    0 6px 20px 0 rgba(148, 130, 15, 0.837);
 }

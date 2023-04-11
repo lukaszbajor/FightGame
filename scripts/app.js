@@ -53,6 +53,18 @@ const fighters = [
     potions: { count: 2, value: 15 },
     avatar: "./images/mummy-g1c81f21c2_640.png",
   },
+  {
+    id: "5",
+    name: "Orc",
+    shortDesc: "Bruiser from Khorinis",
+    attack: 12,
+    specialAttack: 15,
+    defence: 7,
+    criticAttack: { name: "Bloody blow", value: 25 },
+    health: 100,
+    potions: { count: 5, value: 15 },
+    avatar: "./images/orc-gceeba25b3_640.png",
+  },
 ];
 
 const renderFighters = () => {
@@ -147,8 +159,7 @@ const renderFight = () => {
   rootElement.appendChild(fightMain);
 
   if (eventLog.children.length === 0) {
-    eventLog.innerHTML =
-      "<p class='eventLogInfo'>Dziennik zadań jest pusty.</p>";
+    eventLog.innerHTML = "<p class='eventLogInfo'>Event log is empty.</p>";
   } else {
     eventLog.innerHTML = "";
   }
@@ -174,13 +185,18 @@ const attackPlayer = () => {
   const eventLogInfo = document.querySelector(".eventLogInfo");
   const action = document.createElement("li");
   const winText = document.createElement("li");
-  action.textContent =
-    "Atakuje " + fighters[choosePlayer].name + "poprzez zwykły atak";
+  // action.textContent =
+  //   fighters[choosePlayer].name + " attacks with a normal attack";
+
+  action.innerHTML = `<b>${fighters[choosePlayer].name}</b> attacks with a normal attack.`;
+
   eventLog.appendChild(action);
 
   if (hPc <= 0) {
     divHealthPC.textContent = 0;
-    winText.textContent = fighters[choosePlayer].name + " wygrał pojedynek!";
+    // winText.textContent = fighters[choosePlayer].name + " won the duel!";
+
+    winText.innerHTML = `<b>${fighters[choosePlayer].name} won the duel!</b>`;
     eventLog.appendChild(winText);
     AllFightButtons.forEach((item) => {
       item.setAttribute("disabled", true);
@@ -221,13 +237,18 @@ const specialAttackPlayer = () => {
   const eventLog = document.querySelector(".eventLog");
   const action = document.createElement("li");
   const winText = document.createElement("li");
-  action.textContent =
-    "Atakuje " + fighters[choosePlayer].name + "poprzez atak specjalny";
+  // action.textContent =
+  //   fighters[choosePlayer].name + " ";
+
+  action.innerHTML = `<b>${fighters[choosePlayer].name}</b> attacks with a special attack.`;
   eventLog.appendChild(action);
 
   if (hPc <= 0) {
     divHealthPC.textContent = 0;
-    winText.textContent = fighters[choosePlayer].name + " wygrał pojedynek!";
+    // winText.textContent = fighters[choosePlayer].name + " won the duel!";
+
+    winText.innerHTML = `<b>${fighters[choosePlayer].name} won the duel!</b>`;
+
     eventLog.appendChild(winText);
     AllFightButtons.forEach((item) => {
       item.setAttribute("disabled", true);
@@ -270,11 +291,13 @@ const criticAttackPlayer = () => {
   const eventLog = document.querySelector(".eventLog");
   const action = document.createElement("li");
   const winText = document.createElement("li");
-  action.textContent =
-    "Atakuje " +
-    fighters[choosePlayer].name +
-    "poprzez " +
-    fighters[choosePlayer].criticAttack.name;
+  // action.textContent =
+  //   fighters[choosePlayer].name +
+  //   " attacks with a critical attack(" +
+  //   fighters[choosePlayer].criticAttack.name +
+  //   ")";
+
+  action.innerHTML = `<b>${fighters[choosePlayer].name}</b> attacks with a critical attack (<b>${fighters[choosePlayer].criticAttack.name}</b>)`;
   eventLog.appendChild(action);
 
   if (hPc <= 0) {
@@ -303,25 +326,30 @@ const criticAttackPlayer = () => {
 
 let potionsCount = null;
 let hPlayer = null;
+
 // let potionsCount = fighters[choosePlayer].potions.count;
 const potionsPlayer = () => {
   const divHealthPlayer = document.querySelector(".healthPlayer");
   const progressBarPlayer = document.querySelector(".progressBarPlayer");
+  const potionBtn = document.querySelector(".potion");
   // hPlayer = fighters[choosePlayer].health;
 
   potionsCount--;
   const AllFightButtons = document.querySelectorAll(".fightButton");
-  AllFightButtons[3].textContent = "Potions(" + potionsCount + ")";
+  potionBtn.textContent = "Potions(" + potionsCount + ")";
 
   hPlayer = hPlayer + fighters[choosePlayer].potions.value;
 
   divHealthPlayer.textContent = hPlayer;
 
   if (hPlayer > 75) {
-    AllFightButtons[3].setAttribute("disabled", true);
-  } else if (potionsCount === 0) {
-    AllFightButtons[3].setAttribute("disabled", true);
+    potionBtn.setAttribute("disabled", true);
   }
+
+  if (potionsCount === 0) {
+    potionBtn.setAttribute("disabled", true);
+  }
+
   console.log(hPlayer);
   console.log(potionsCount);
   const eventLog = document.querySelector(".eventLog");
@@ -339,6 +367,10 @@ const potionsPlayer = () => {
   items[0].classList.remove("active");
   items[1].classList.add("active");
 
+  AllFightButtons.forEach((item) => {
+    item.setAttribute("disabled", true);
+  });
+
   audioPotion.play();
 };
 
@@ -351,6 +383,10 @@ const pcMoves = () => {
   const AllFightButtons = document.querySelectorAll(".fightButton");
   const progressBarPc = document.querySelector(".progressBarPc");
   const progressBarPlayer = document.querySelector(".progressBarPlayer");
+  const potionBtn = document.querySelector(".potion");
+  const items = document.querySelectorAll(".item");
+  // items[0].classList.remove("active");
+  // items[1].classList.add("active");
   // hPlayer = fighters[choosePlayer].health;
   // console.log(hPlayer);
 
@@ -411,8 +447,13 @@ const pcMoves = () => {
   });
 
   if (hPlayer > 75) {
-    AllFightButtons[3].setAttribute("disabled", true);
+    potionBtn.setAttribute("disabled", true);
   }
+
+  if (potionsCount === 0) {
+    potionBtn.setAttribute("disabled", true);
+  }
+
   const eventLog = document.querySelector(".eventLog");
   const action = document.createElement("li");
   const winText = document.createElement("li");
@@ -441,6 +482,9 @@ const pcMoves = () => {
   action.classList.add("pc");
   eventLog.appendChild(action);
 
+  items[0].classList.add("active");
+  items[1].classList.remove("active");
+
   if (hPlayer <= 0) {
     divHealthPlayer.textContent = 0;
     winText.textContent = fighters[choosePc].name + " wygrał pojedynek!";
@@ -449,11 +493,9 @@ const pcMoves = () => {
       item.setAttribute("disabled", true);
     });
     progressBarPlayer.style.display = "none";
+    items[0].classList.remove("active");
+    items[1].classList.add("winner");
   }
-
-  const items = document.querySelectorAll(".item");
-  items[0].classList.add("active");
-  items[1].classList.remove("active");
 };
 // const AllFightButtons = document.querySelectorAll(".fightButton");
 
@@ -483,6 +525,7 @@ const startGame = () => {
     hPlayer = fighters[choosePlayer].health;
 
     AllFightButtons[3].textContent = "Potions(" + potionsCount + ")";
+    AllFightButtons[3].classList.add("potion");
     AllFightButtons[3].addEventListener("click", potionsPlayer);
 
     if (fighters[choosePlayer].health > 85) {
