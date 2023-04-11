@@ -136,7 +136,15 @@ const renderFight = () => {
   eventLog.classList.add("eventLog");
   fightMain.appendChild(eventLog);
 
+  console.log(eventLog);
   rootElement.appendChild(fightMain);
+
+  if (eventLog.children.length === 0) {
+    eventLog.innerHTML =
+      "<p class='eventLogInfo'>Dziennik zadań jest pusty.</p>";
+  } else {
+    eventLog.innerHTML = "";
+  }
 };
 let hPc = fighters[choosePc].health;
 
@@ -156,6 +164,7 @@ const attackPlayer = () => {
   });
 
   const eventLog = document.querySelector(".eventLog");
+  const eventLogInfo = document.querySelector(".eventLogInfo");
   const action = document.createElement("li");
   const winText = document.createElement("li");
   action.textContent =
@@ -177,7 +186,7 @@ const attackPlayer = () => {
   }
 
   progressBarPc.style.width = hPc + "%";
-
+  eventLogInfo.style.display = "none";
   const items = document.querySelectorAll(".item");
   items[0].classList.remove("active");
   items[1].classList.add("active");
@@ -186,6 +195,7 @@ const attackPlayer = () => {
 const specialAttackPlayer = () => {
   const divHealthPC = document.querySelector(".healthPc");
   const progressBarPc = document.querySelector(".progressBarPc");
+  const eventLogInfo = document.querySelector(".eventLogInfo");
 
   hPc =
     hPc -
@@ -219,6 +229,8 @@ const specialAttackPlayer = () => {
       pcMoves();
     }, 5000);
 
+    eventLogInfo.style.display = "none";
+
     const items = document.querySelectorAll(".item");
     items[0].classList.remove("active");
     items[1].classList.add("active");
@@ -232,6 +244,7 @@ const specialAttackPlayer = () => {
 const criticAttackPlayer = () => {
   const divHealthPC = document.querySelector(".healthPc");
   const progressBarPc = document.querySelector(".progressBarPc");
+  const eventLogInfo = document.querySelector(".eventLogInfo");
 
   hPc = hPc - fighters[choosePlayer].criticAttack.value;
 
@@ -267,6 +280,8 @@ const criticAttackPlayer = () => {
     }, 5000);
   }
   progressBarPc.style.width = hPc + "%";
+
+  eventLogInfo.style.display = "none";
 
   const items = document.querySelectorAll(".item");
   items[0].classList.remove("active");
