@@ -1,6 +1,8 @@
 const rootElement = document.querySelector("#root");
 const startBox = document.querySelector(".start");
 const startBtn = document.querySelector(".startBtn");
+const audioPunch = new Audio("./audio/punch-140236.mp3");
+const audioPotion = new Audio("./audio/085594_potion-35983.mp3");
 
 const fighters = [
   {
@@ -190,6 +192,8 @@ const attackPlayer = () => {
   const items = document.querySelectorAll(".item");
   items[0].classList.remove("active");
   items[1].classList.add("active");
+
+  audioPunch.play();
 };
 
 const specialAttackPlayer = () => {
@@ -239,6 +243,8 @@ const specialAttackPlayer = () => {
   const items = document.querySelectorAll(".item");
   items[0].classList.remove("active");
   items[1].classList.add("active");
+
+  audioPunch.play();
 };
 
 const criticAttackPlayer = () => {
@@ -286,6 +292,8 @@ const criticAttackPlayer = () => {
   const items = document.querySelectorAll(".item");
   items[0].classList.remove("active");
   items[1].classList.add("active");
+
+  audioPunch.play();
 };
 
 let potionsCount = null;
@@ -325,6 +333,8 @@ const potionsPlayer = () => {
   const items = document.querySelectorAll(".item");
   items[0].classList.remove("active");
   items[1].classList.add("active");
+
+  audioPotion.play();
 };
 
 let countPotionsPc = fighters[choosePc].potions.count;
@@ -370,6 +380,7 @@ const pcMoves = () => {
     // console.log(hPlayer);
 
     divHealthPlayer.textContent = hPlayer;
+    audioPunch.play();
   } else if (actionNumber === 1) {
     hPlayer =
       hPlayer -
@@ -377,12 +388,15 @@ const pcMoves = () => {
         fighters[choosePc].specialAttack);
 
     divHealthPlayer.textContent = hPlayer;
+    audioPunch.play();
   } else if (actionNumber === 2) {
     hPlayer = hPlayer - fighters[choosePc].criticAttack.value;
     countCriticAttackPC = 1;
     divHealthPlayer.textContent = hPlayer;
+    audioPunch.play();
   } else {
     hPc = hPc + fighters[choosePc].potions.value;
+    audioPotion.play();
 
     divHealthPC.textContent = hPc;
   }
