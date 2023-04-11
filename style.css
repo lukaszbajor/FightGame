@@ -185,6 +185,7 @@ body {
 }
 .info {
   margin-top: 2em;
+  font-weight: 400;
 }
 .startBtn {
   margin-top: 1em;
@@ -214,4 +215,13 @@ body {
   /* box-shadow: 14px 10px 14px gold, 0 10px 40px gold inset; */
   box-shadow: 0 6px 20px 0 rgba(148, 130, 15, 0.837),
     0 6px 20px 0 rgba(148, 130, 15, 0.837);
+}
+.themeBody {
+  background-color: #545454;
+}
+.themeItems {
+  border: 2px solid black;
+}
+.themeItems img.itemAvatar {
+  background-color: #4e6114;
 }

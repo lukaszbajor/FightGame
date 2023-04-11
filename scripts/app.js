@@ -3,6 +3,8 @@ const startBox = document.querySelector(".start");
 const startBtn = document.querySelector(".startBtn");
 const audioPunch = new Audio("./audio/punch-140236.mp3");
 const audioPotion = new Audio("./audio/085594_potion-35983.mp3");
+const themeBtn = document.querySelector(".theme");
+const body = document.querySelector("body");
 
 const fighters = [
   {
@@ -12,7 +14,7 @@ const fighters = [
     attack: 8,
     specialAttack: 12,
     defence: 5,
-    criticAttack: { name: "Rain of fire", value: 20 },
+    criticAttack: { name: "Rain of fire", value: 99 },
     health: 100,
     potions: { count: 3, value: 15 },
     avatar: "./images/wizard-g090ae14b0_640.png",
@@ -191,6 +193,9 @@ const attackPlayer = () => {
   action.innerHTML = `<b>${fighters[choosePlayer].name}</b> attacks with a normal attack.`;
 
   eventLog.appendChild(action);
+  const items = document.querySelectorAll(".item");
+  items[0].classList.remove("active");
+  items[1].classList.add("active");
 
   if (hPc <= 0) {
     divHealthPC.textContent = 0;
@@ -202,6 +207,8 @@ const attackPlayer = () => {
       item.setAttribute("disabled", true);
     });
     progressBarPc.style.display = "none";
+    items[1].classList.remove("active");
+    items[0].classList.add("winner");
   } else {
     setTimeout(() => {
       pcMoves();
@@ -210,9 +217,6 @@ const attackPlayer = () => {
 
   progressBarPc.style.width = hPc + "%";
   eventLogInfo.style.display = "none";
-  const items = document.querySelectorAll(".item");
-  items[0].classList.remove("active");
-  items[1].classList.add("active");
 
   audioPunch.play();
 };
@@ -242,6 +246,9 @@ const specialAttackPlayer = () => {
 
   action.innerHTML = `<b>${fighters[choosePlayer].name}</b> attacks with a special attack.`;
   eventLog.appendChild(action);
+  const items = document.querySelectorAll(".item");
+  items[0].classList.remove("active");
+  items[1].classList.add("active");
 
   if (hPc <= 0) {
     divHealthPC.textContent = 0;
@@ -254,21 +261,19 @@ const specialAttackPlayer = () => {
       item.setAttribute("disabled", true);
     });
     progressBarPc.style.display = "none";
+    items[1].classList.remove("active");
+    items[0].classList.add("winner");
   } else {
     setTimeout(() => {
       pcMoves();
     }, 5000);
 
     eventLogInfo.style.display = "none";
-
-    const items = document.querySelectorAll(".item");
-    items[0].classList.remove("active");
-    items[1].classList.add("active");
   }
   progressBarPc.style.width = hPc + "%";
-  const items = document.querySelectorAll(".item");
-  items[0].classList.remove("active");
-  items[1].classList.add("active");
+  // const items = document.querySelectorAll(".item");
+  // items[0].classList.remove("active");
+  // items[1].classList.add("active");
 
   audioPunch.play();
 };
@@ -300,14 +305,22 @@ const criticAttackPlayer = () => {
   action.innerHTML = `<b>${fighters[choosePlayer].name}</b> attacks with a critical attack (<b>${fighters[choosePlayer].criticAttack.name}</b>)`;
   eventLog.appendChild(action);
 
+  const items = document.querySelectorAll(".item");
+  items[0].classList.remove("active");
+  items[1].classList.add("active");
+
   if (hPc <= 0) {
     divHealthPC.textContent = 0;
-    winText.textContent = fighters[choosePlayer].name + " wygrał pojedynek!";
+    // winText.textContent = fighters[choosePlayer].name + " wygrał pojedynek!";
+    winText.innerHTML = `<b>${fighters[choosePlayer].name} won the duel!</b>`;
     eventLog.appendChild(winText);
     AllFightButtons.forEach((item) => {
       item.setAttribute("disabled", true);
     });
     progressBarPc.style.display = "none";
+
+    items[1].classList.remove("active");
+    items[0].classList.add("winner");
   } else {
     setTimeout(() => {
       pcMoves();
@@ -316,10 +329,6 @@ const criticAttackPlayer = () => {
   progressBarPc.style.width = hPc + "%";
 
   eventLogInfo.style.display = "none";
-
-  const items = document.querySelectorAll(".item");
-  items[0].classList.remove("active");
-  items[1].classList.add("active");
 
   audioPunch.play();
 };
@@ -354,8 +363,10 @@ const potionsPlayer = () => {
   console.log(potionsCount);
   const eventLog = document.querySelector(".eventLog");
   const action = document.createElement("li");
-  action.textContent =
-    fighters[choosePlayer].name + " użył mikstury uzdarwiającej";
+  // action.textContent =
+  //   fighters[choosePlayer].name + " użył mikstury uzdarwiającej";
+
+  action.innerHTML = `<b>${fighters[choosePlayer].name}</b> used the potion.</b>)`;
   eventLog.appendChild(action);
 
   setTimeout(() => {
@@ -459,23 +470,17 @@ const pcMoves = () => {
   const winText = document.createElement("li");
 
   if (actionNumber === 0) {
-    action.textContent =
-      "Atakuje " + fighters[choosePc].name + " poprzez zwykły atak";
+    action.innerHTML = `<b>${fighters[choosePc].name}</b> attacks with a normal attack.`;
+
     progressBarPlayer.style.width = hPlayer + "%";
   } else if (actionNumber === 1) {
-    action.textContent =
-      "Atakuje " + fighters[choosePc].name + " poprzez atak specjalny";
+    action.innerHTML = `<b>${fighters[choosePc].name}</b> attacks with a special attack.`;
     progressBarPlayer.style.width = hPlayer + "%";
   } else if (actionNumber === 2) {
-    action.textContent =
-      "Atakuje " +
-      fighters[choosePc].name +
-      " poprzez niesamowitą zdolność" +
-      fighters[choosePc].criticAttack.name;
+    action.innerHTML = `<b>${fighters[choosePc].name}</b> attacks with a critical attack (<b>${fighters[choosePc].criticAttack.name}</b>)`;
     progressBarPlayer.style.width = hPlayer + "%";
   } else {
-    action.textContent =
-      fighters[choosePc].name + " użył mikstury uzdarwiającej";
+    action.innerHTML = `<b>${fighters[choosePc].name}</b> used the potion.</b>`;
     progressBarPc.style.width = hPc + "%";
   }
 
@@ -487,7 +492,7 @@ const pcMoves = () => {
 
   if (hPlayer <= 0) {
     divHealthPlayer.textContent = 0;
-    winText.textContent = fighters[choosePc].name + " wygrał pojedynek!";
+    winText.innerHTML = `<b>${fighters[choosePc].name} won the duel!</b>`;
     eventLog.appendChild(winText);
     AllFightButtons.forEach((item) => {
       item.setAttribute("disabled", true);
@@ -510,6 +515,13 @@ const startGame = () => {
 
     const items = document.querySelectorAll(".item");
     items[0].classList.add("active");
+
+    if (themeBtn.textContent === "Light Mode") {
+      const items = document.querySelectorAll(".item");
+      items.forEach((item) => {
+        item.classList.toggle("themeItems");
+      });
+    }
 
     const AllFightButtons = document.querySelectorAll(".fightButton");
     AllFightButtons[0].textContent = "Attack";
@@ -534,3 +546,15 @@ const startGame = () => {
   }
 };
 startBtn.addEventListener("click", startGame);
+
+const themeFn = () => {
+  body.classList.toggle("themeBody");
+  themeBtn.textContent =
+    themeBtn.textContent === "Dark Mode" ? "Light Mode" : "Dark Mode";
+  const items = document.querySelectorAll(".item");
+  items.forEach((item) => {
+    item.classList.toggle("themeItems");
+  });
+};
+
+themeBtn.addEventListener("click", themeFn);
