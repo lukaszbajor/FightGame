@@ -129,10 +129,15 @@ const renderFight = () => {
   fightButtons.classList.add("fightButtons");
   for (i = 0; i <= 3; i++) {
     const fightButton = document.createElement("button");
-    fightButton.classList.add("fightButton");
+    fightButton.classList.add("fightButton", "mainBtn");
     fightButtons.appendChild(fightButton);
   }
   fightMain.appendChild(fightButtons);
+
+  const eventLogHeader = document.createElement("h2");
+  eventLogHeader.classList.add("eventLogHeader");
+  eventLogHeader.textContent = "Event Log:";
+  fightMain.appendChild(eventLogHeader);
 
   const eventLog = document.createElement("ul");
   eventLog.classList.add("eventLog");
@@ -433,6 +438,7 @@ const pcMoves = () => {
     progressBarPc.style.width = hPc + "%";
   }
 
+  action.classList.add("pc");
   eventLog.appendChild(action);
 
   if (hPlayer <= 0) {
