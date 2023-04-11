@@ -16,6 +16,7 @@ button {
 }
 body {
   background-color: #d6d3d3;
+  transition: 0.5s;
 }
 #root {
   max-width: 1200px;
@@ -38,6 +39,7 @@ body {
   font-size: 1.2rem;
   font-weight: bold;
   cursor: pointer;
+  transition: 0.5s;
 }
 .list {
   margin: 20px;
@@ -51,12 +53,14 @@ body {
   border: 2px solid #575357;
   border-radius: 4px;
   cursor: pointer;
+  transition: 0.5s;
 }
 .itemAvatar {
   width: 200px;
   height: 250px;
   padding: 3px;
   background-color: #e2e3c9;
+  transition: 0.5s;
 }
 .desc {
   padding: 5px;
@@ -218,10 +222,13 @@ body {
 }
 .themeBody {
   background-color: #545454;
+  transition: 0.5s;
 }
 .themeItems {
   border: 2px solid black;
+  transition: 0.5s;
 }
 .themeItems img.itemAvatar {
   background-color: #4e6114;
+  transition: 0.5s;
 }
