@@ -44,24 +44,26 @@ body {
 .list {
   margin: 20px;
   display: flex;
+  flex-wrap: wrap;
   list-style: none;
 }
 .item {
-  margin: 0 5px;
+  margin: 2.5px 2.5px;
   display: flex;
   flex-direction: column;
   border: 2px solid #575357;
   border-radius: 4px;
   cursor: pointer;
-  transition: 0.5s;
+  transition: 0.3s;
 }
 .itemAvatar {
   width: 200px;
   height: 250px;
-  padding: 3px;
+  /* padding: 3px; */
   background-color: #e2e3c9;
   transition: 0.5s;
 }
+
 .desc {
   padding: 5px;
   border-top: 2px solid #575357;
