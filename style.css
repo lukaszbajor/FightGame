@@ -17,7 +17,9 @@ button {
 body {
   background-color: #d6d3d3;
   transition: 0.5s;
+  overflow: hidden;
 }
+
 #root {
   max-width: 1200px;
   margin: 0 auto;
@@ -28,6 +30,7 @@ body {
   align-items: center;
   padding: 1.2em;
   background-color: #3d3b3d;
+  z-index: 10;
 }
 .logo {
   font-family: "Sedgwick Ave Display", cursive;
@@ -232,5 +235,16 @@ body {
 }
 .themeItems img.itemAvatar {
   background-color: #4e6114;
+  transition: 0.3s;
+}
+
+.mainAudio {
+  /* display: none; */
+  position: absolute;
+  top: 85px;
+  right: -100%;
   transition: 0.5s;
+}
+.activeMainAudio {
+  right: 10px;
 }

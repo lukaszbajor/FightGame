@@ -5,6 +5,8 @@ const audioPunch = new Audio("./audio/punch-140236.mp3");
 const audioPotion = new Audio("./audio/085594_potion-35983.mp3");
 const themeBtn = document.querySelector(".theme");
 const body = document.querySelector("body");
+const audioBtn = document.querySelector(".audioBtn");
+const mainAudio = document.querySelector(".mainAudio");
 
 const fighters = [
   {
@@ -618,3 +620,8 @@ const themeFn = () => {
 };
 
 themeBtn.addEventListener("click", themeFn);
+
+const audioFn = () => {
+  mainAudio.classList.toggle("activeMainAudio");
+};
+audioBtn.addEventListener("click", audioFn);

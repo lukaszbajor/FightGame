@@ -19,12 +19,25 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
+
     <title>Fight Game</title>
+    <script
+      src="https://kit.fontawesome.com/9bf94860b7.js"
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body>
     <header class="header">
       <h1 class="logo">Fight Game</h1>
-      <button class="theme mainBtn">Dark Mode</button>
+      <div class="headerButtons">
+        <button class="theme mainBtn">Dark Mode</button>
+        <audio controls loop class="mainAudio">
+          <source src="./audio/ambient-classical-guitar-144998.mp3" />
+        </audio>
+        <button class="mainBtn audioBtn">
+          <i class="fa fa-volume-up" aria-hidden="true"></i>
+        </button>
+      </div>
     </header>
     <div class="start">
       <h2 class="info">
@@ -34,12 +47,11 @@
     </div>
 
     <main id="root"></main>
-    <audio autoplay loop>
-      <source src="./audio/ambient-classical-guitar-144998.mp3" />
-    </audio>
+
     <!-- <script type="module" src="./scripts/fighters.js"></script> -->
     <!-- <script type="module" src="./scripts/fightDashboard.js"></script> -->
     <!-- <script type="module" src="./scripts/renderFighters.js"></script> -->
+
     <script src="./scripts/app.js" defer></script>
   </body>
 </html>
