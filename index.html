@@ -31,9 +31,15 @@
       <h1 class="logo">Fight Game</h1>
       <div class="headerButtons">
         <button class="theme mainBtn">Dark Mode</button>
-        <audio controls loop class="mainAudio">
-          <source src="./audio/ambient-classical-guitar-144998.mp3" />
+        <audio autoplay controls loop class="mainAudio">
+          <source
+            src="./audio/ambient-classical-guitar-144998.mp3"
+            class="audioSource"
+          />
         </audio>
+        <button class="mainBtn">
+          <i class="fa fa-question" aria-hidden="true"></i>
+        </button>
         <button class="mainBtn audioBtn">
           <i class="fa fa-volume-up" aria-hidden="true"></i>
         </button>

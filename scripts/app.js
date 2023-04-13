@@ -6,6 +6,7 @@ const audioPotion = new Audio("./audio/085594_potion-35983.mp3");
 const themeBtn = document.querySelector(".theme");
 const body = document.querySelector("body");
 const audioBtn = document.querySelector(".audioBtn");
+const audioSource = document.querySelector(".audioSource");
 const mainAudio = document.querySelector(".mainAudio");
 
 const fighters = [
@@ -271,6 +272,9 @@ const attackPlayer = () => {
     progressBarPc.style.display = "none";
     items[1].classList.remove("active");
     items[0].classList.add("winner");
+
+    mainAudio.src = "./audio/success-fanfare-trumpets-6185.mp3";
+    mainAudio.play();
   } else {
     setTimeout(() => {
       pcMoves();
@@ -325,6 +329,9 @@ const specialAttackPlayer = () => {
     progressBarPc.style.display = "none";
     items[1].classList.remove("active");
     items[0].classList.add("winner");
+
+    mainAudio.src = "./audio/success-fanfare-trumpets-6185.mp3";
+    mainAudio.play();
   } else {
     setTimeout(() => {
       pcMoves();
@@ -383,6 +390,9 @@ const criticAttackPlayer = () => {
 
     items[1].classList.remove("active");
     items[0].classList.add("winner");
+
+    mainAudio.src = "./audio/success-fanfare-trumpets-6185.mp3";
+    mainAudio.play();
   } else {
     setTimeout(() => {
       pcMoves();
@@ -562,6 +572,9 @@ const pcMoves = () => {
     progressBarPlayer.style.display = "none";
     items[0].classList.remove("active");
     items[1].classList.add("winner");
+
+    mainAudio.src = "./audio/success-fanfare-trumpets-6185.mp3";
+    mainAudio.play();
   }
 };
 // const AllFightButtons = document.querySelectorAll(".fightButton");
@@ -605,7 +618,10 @@ const startGame = () => {
     if (fighters[choosePlayer].health > 85) {
       AllFightButtons[3].setAttribute("disabled", true);
     }
+    mainAudio.src = "./audio/heroic-intro-21468.mp3";
+    mainAudio.play();
   }
+  // audioSource.setAttribute("src", "./audio/heroic-intro-21468.mp3");
 };
 startBtn.addEventListener("click", startGame);
 
