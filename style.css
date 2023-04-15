@@ -17,8 +17,7 @@ button {
 body {
   background-color: #d6d3d3;
   transition: 0.5s;
-  overflow: hidden;
-  padding-bottom: 10px;
+  overflow-x: hidden;
 }
 
 #root {
