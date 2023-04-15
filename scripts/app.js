@@ -8,6 +8,8 @@ const body = document.querySelector("body");
 const audioBtn = document.querySelector(".audioBtn");
 const audioSource = document.querySelector(".audioSource");
 const mainAudio = document.querySelector(".mainAudio");
+const modal = document.querySelector(".modalBox");
+const modalBtn = document.querySelector(".modalBtn");
 
 const fighters = [
   {
@@ -220,6 +222,11 @@ const renderFight = () => {
   eventLog.classList.add("eventLog");
   fightMain.appendChild(eventLog);
 
+  const playAgainBtn = document.createElement("button");
+  playAgainBtn.classList.add("mainBtn", "playAgainBtn");
+  playAgainBtn.textContent = "Play Again!";
+  fightMain.appendChild(playAgainBtn);
+
   console.log(eventLog);
   rootElement.appendChild(fightMain);
 
@@ -250,6 +257,7 @@ const attackPlayer = () => {
   const eventLogInfo = document.querySelector(".eventLogInfo");
   const action = document.createElement("li");
   const winText = document.createElement("li");
+  const playAgainBtn = document.querySelector(".playAgainBtn");
   // action.textContent =
   //   fighters[choosePlayer].name + " attacks with a normal attack";
 
@@ -273,6 +281,11 @@ const attackPlayer = () => {
     items[1].classList.remove("active");
     items[0].classList.add("winner");
 
+    playAgainBtn.style.display = "block";
+    playAgainBtn.addEventListener("click", () => {
+      location.reload();
+    });
+
     mainAudio.src = "./audio/success-fanfare-trumpets-6185.mp3";
     mainAudio.play();
   } else {
@@ -283,7 +296,7 @@ const attackPlayer = () => {
 
   progressBarPc.style.width = hPc + "%";
   eventLogInfo.style.display = "none";
-
+  eventLog.scrollTop = eventLog.scrollHeight;
   audioPunch.play();
 };
 
@@ -291,6 +304,7 @@ const specialAttackPlayer = () => {
   const divHealthPC = document.querySelector(".healthPc");
   const progressBarPc = document.querySelector(".progressBarPc");
   const eventLogInfo = document.querySelector(".eventLogInfo");
+  const playAgainBtn = document.querySelector(".playAgainBtn");
 
   hPc =
     hPc -
@@ -330,6 +344,11 @@ const specialAttackPlayer = () => {
     items[1].classList.remove("active");
     items[0].classList.add("winner");
 
+    playAgainBtn.style.display = "block";
+    playAgainBtn.addEventListener("click", () => {
+      location.reload();
+    });
+
     mainAudio.src = "./audio/success-fanfare-trumpets-6185.mp3";
     mainAudio.play();
   } else {
@@ -343,7 +362,7 @@ const specialAttackPlayer = () => {
   // const items = document.querySelectorAll(".item");
   // items[0].classList.remove("active");
   // items[1].classList.add("active");
-
+  eventLog.scrollTop = eventLog.scrollHeight;
   audioPunch.play();
 };
 
@@ -351,6 +370,7 @@ const criticAttackPlayer = () => {
   const divHealthPC = document.querySelector(".healthPc");
   const progressBarPc = document.querySelector(".progressBarPc");
   const eventLogInfo = document.querySelector(".eventLogInfo");
+  const playAgainBtn = document.querySelector(".playAgainBtn");
 
   hPc = hPc - fighters[choosePlayer].criticAttack.value;
 
@@ -391,6 +411,11 @@ const criticAttackPlayer = () => {
     items[1].classList.remove("active");
     items[0].classList.add("winner");
 
+    playAgainBtn.style.display = "block";
+    playAgainBtn.addEventListener("click", () => {
+      location.reload();
+    });
+
     mainAudio.src = "./audio/success-fanfare-trumpets-6185.mp3";
     mainAudio.play();
   } else {
@@ -401,7 +426,7 @@ const criticAttackPlayer = () => {
   progressBarPc.style.width = hPc + "%";
 
   eventLogInfo.style.display = "none";
-
+  eventLog.scrollTop = eventLog.scrollHeight;
   audioPunch.play();
 };
 
@@ -453,7 +478,7 @@ const potionsPlayer = () => {
   AllFightButtons.forEach((item) => {
     item.setAttribute("disabled", true);
   });
-
+  eventLog.scrollTop = eventLog.scrollHeight;
   audioPotion.play();
 };
 
@@ -468,6 +493,7 @@ const pcMoves = () => {
   const progressBarPlayer = document.querySelector(".progressBarPlayer");
   const potionBtn = document.querySelector(".potion");
   const items = document.querySelectorAll(".item");
+  const playAgainBtn = document.querySelector(".playAgainBtn");
   // items[0].classList.remove("active");
   // items[1].classList.add("active");
   // hPlayer = fighters[choosePlayer].health;
@@ -573,15 +599,21 @@ const pcMoves = () => {
     items[0].classList.remove("active");
     items[1].classList.add("winner");
 
+    playAgainBtn.style.display = "block";
+    playAgainBtn.addEventListener("click", () => {
+      location.reload();
+    });
+
     mainAudio.src = "./audio/success-fanfare-trumpets-6185.mp3";
     mainAudio.play();
   }
+  eventLog.scrollTop = eventLog.scrollHeight;
 };
 // const AllFightButtons = document.querySelectorAll(".fightButton");
 
 const startGame = () => {
   if (currentElement === null) {
-    alert("Wybierz character!");
+    modal.style.display = "flex";
   } else {
     rootElement.innerHTML = "";
     startBox.style.display = "none";
@@ -639,5 +671,10 @@ themeBtn.addEventListener("click", themeFn);
 
 const audioFn = () => {
   mainAudio.classList.toggle("activeMainAudio");
+  audioBtn.classList.toggle("pressed");
 };
 audioBtn.addEventListener("click", audioFn);
+const removeModal = () => {
+  modal.style.display = "none";
+};
+modalBtn.addEventListener("click", removeModal);
