@@ -10,6 +10,7 @@ const audioSource = document.querySelector(".audioSource");
 const mainAudio = document.querySelector(".mainAudio");
 const modal = document.querySelector(".modalBox");
 const modalBtn = document.querySelector(".modalBtn");
+const mode = document.querySelector("#mode");
 
 const fighters = [
   {
@@ -623,7 +624,7 @@ const startGame = () => {
     const items = document.querySelectorAll(".item");
     items[0].classList.add("active");
 
-    if (themeBtn.textContent === "Light Mode") {
+    if (mode.classList.contains("fa-lightbulb-o")) {
       const items = document.querySelectorAll(".item");
       items.forEach((item) => {
         item.classList.toggle("themeItems");
@@ -659,7 +660,7 @@ startBtn.addEventListener("click", startGame);
 
 const darkMode = document.querySelector(".darkMode");
 const lightMode = document.querySelector(".lightMode");
-const mode = document.querySelector("#mode");
+
 
 const themeFn = () => {
   body.classList.toggle("themeBody");
