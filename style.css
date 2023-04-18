@@ -40,6 +40,7 @@ body {
   color: white;
 }
 .theme {
+  width: 39px;
   padding: 0.5em;
   font-size: 1.2rem;
   font-weight: bold;
@@ -59,7 +60,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-basis: 25%;
+  flex-basis: 35%;
   margin-bottom: 25em;
   height: 150px;
   padding: 10px;
@@ -164,6 +165,10 @@ body {
   padding: 1.2em;
   font-size: 1.2rem;
   font-weight: bold;
+}
+.theme i {
+  display: inline-block;
+  width: 100%;
 }
 
 .eventLogInfo {
@@ -298,13 +303,7 @@ body {
   align-self: center;
   font-weight: bold;
 }
-.darkMode,
-.lightMode {
-  /* display: none; */
-}
-.activeMode {
-  display: inline-block;
-}
+
 @media (max-width: 768px) {
   .eventLog {
     width: 90%;
@@ -312,5 +311,18 @@ body {
   .itemAvatar {
     width: 180px;
     height: 230px;
+  }
+  .modal {
+    flex-basis: 90%;
+  }
+}
+@media (min-width: 768px) {
+  .modal {
+    flex-basis: 60%;
+  }
+}
+@media (min-width: 1200px) {
+  .modal {
+    flex-basis: 25%;
   }
 }

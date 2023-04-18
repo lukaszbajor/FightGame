@@ -659,12 +659,18 @@ startBtn.addEventListener("click", startGame);
 
 const darkMode = document.querySelector(".darkMode");
 const lightMode = document.querySelector(".lightMode");
+const mode = document.querySelector("#mode");
 
 const themeFn = () => {
   body.classList.toggle("themeBody");
-  themeBtn.innerHTML === "<i class='fa fa-lightbulb-o ' aria-hidden='true'></i>"
-    ? "<i class=' fa fa-moon-ofa ' aria-hidden='true'></i>"
-    : "<i class='fa-lightbulb-o' aria-hidden='true'></i>";
+
+  if (mode.classList.contains("fa-lightbulb-o") === true) {
+    mode.classList.add("fa-moon-o");
+    mode.classList.remove("fa-lightbulb-o");
+  } else {
+    mode.classList.remove("fa-moon-o");
+    mode.classList.add("fa-lightbulb-o");
+  }
 
   const items = document.querySelectorAll(".item");
   items.forEach((item) => {
