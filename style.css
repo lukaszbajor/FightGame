@@ -24,6 +24,7 @@ body {
   max-width: 1200px;
   margin: 0 auto;
 }
+
 .header {
   display: flex;
   justify-content: space-between;
@@ -77,8 +78,9 @@ body {
   align-self: flex-end;
 }
 .list {
-  margin: 20px;
+  margin-top: 20px;
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   list-style: none;
 }
@@ -137,6 +139,7 @@ body {
   overflow-y: scroll;
   list-style: none;
 }
+
 .eventLog li {
   /* margin-top: 0.2em; */
   border: 2px solid #3d3b3d;
@@ -226,7 +229,9 @@ body {
 }
 .info {
   margin-top: 2em;
+  padding: 0.5em;
   font-weight: 400;
+  text-align: center;
 }
 .startBtn {
   margin-top: 1em;
@@ -250,6 +255,10 @@ body {
 .fightButton:disabled {
   opacity: 0.2;
   cursor: default;
+}
+.fightButtons {
+  margin-top: 2em;
+  display: flex;
 }
 .winner {
   /* box-shadow: 5px 5px 5px 5px gold; */
@@ -288,4 +297,20 @@ body {
   margin-top: 10px;
   align-self: center;
   font-weight: bold;
+}
+.darkMode,
+.lightMode {
+  /* display: none; */
+}
+.activeMode {
+  display: inline-block;
+}
+@media (max-width: 768px) {
+  .eventLog {
+    width: 90%;
+  }
+  .itemAvatar {
+    width: 180px;
+    height: 230px;
+  }
 }

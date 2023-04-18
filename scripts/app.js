@@ -657,10 +657,15 @@ const startGame = () => {
 };
 startBtn.addEventListener("click", startGame);
 
+const darkMode = document.querySelector(".darkMode");
+const lightMode = document.querySelector(".lightMode");
+
 const themeFn = () => {
   body.classList.toggle("themeBody");
-  themeBtn.textContent =
-    themeBtn.textContent === "Dark Mode" ? "Light Mode" : "Dark Mode";
+  themeBtn.innerHTML === "<i class='fa fa-lightbulb-o ' aria-hidden='true'></i>"
+    ? "<i class=' fa fa-moon-ofa ' aria-hidden='true'></i>"
+    : "<i class='fa-lightbulb-o' aria-hidden='true'></i>";
+
   const items = document.querySelectorAll(".item");
   items.forEach((item) => {
     item.classList.toggle("themeItems");
